@@ -25,6 +25,20 @@ enum LainErr {
     TESTERR,
 }
 
+
+
+
+fn lain_help(args: &[&str]) -> Result<u32, LainErr> {
+    if args.len() == 0 {
+        println!("Showing generic help...");
+        Ok(0)
+    } else {
+        println!("Showing help for command \"{}\"...", args[0]);
+        Ok(0)
+    }
+}
+
+
 fn lain_init() {
     println!("Initializing core modules...");
     println!("Close this world. Open the next.");
@@ -47,6 +61,7 @@ fn lain_eval(input: &Vec<&str>) -> Result<u32, LainErr> {
             "EXIT"     => Err(LainErr::QUIT),
             "QUIT"     => Err(LainErr::QUIT),
             "THROWERR" => Err(LainErr::TESTERR),
+            "HELP"     => lain_help(&input[1..]),
             _          => Ok(0),
         }
     }
