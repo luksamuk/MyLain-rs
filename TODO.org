@@ -1,0 +1,29 @@
+To-Do List for MyLain-rs
+The very useful, distributed personal assistant for smart homes
+
+* Group of commands
+** DONE quit
+Exists MyLain-rs.
+** DONE exit
+Exits MyLain-rs.
+** TODO help
+- ()        => Shows help prompt.
+- (command) => Also shows help for single commands.
+** TODO connect
+- ()            => Connects to local dummy IP address and port.
+- (ipaddr port) => Connects to server running at the specified IP address and port.
+** TODO config
+- ()            => Shows all config fields.
+- (:get field)  => Prints the current configuration for a field.
+- (:set field)  => Redefines the current configuration for a field.
+** TODO status
+Shows general client status. If client is connected to server, server status is fetched as well.
+** TODO qdisp
+Dispatches enqueued subprocesses.
+** TODO qpeek
+Prints all enqueued subprocesses.
+
+** TODO dispatch
+- (atoms...)    => Dispatches processes to all relays.
+** TODO printext
+- (atoms...)    => Prints next sequence of atoms as a continuous string.
