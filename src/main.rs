@@ -23,6 +23,7 @@ const MYLAIN_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 enum LainErr {
     QUIT,
     TESTERR,
+    BADCOMMAND,
 }
 
 
@@ -30,11 +31,35 @@ enum LainErr {
 
 fn lain_help(args: &[&str]) -> Result<u32, LainErr> {
     if args.len() == 0 {
-        println!("Showing generic help...");
+        println!("MyLain-rs v{}", MYLAIN_VERSION);
+        println!("The very useful, distributed personal assistant for smart homes");
+        println!("This cheatsheet is temporary and may change.\n");
+
+        println!("GENERAL COMMANDS");
+        println!("help      -- () Shows this prompt.");
+        println!("             (command) Shows help for said command.");
+        println!("quit      -- () Exits MyLain.");
+        println!("exit      -- () Exits MyLain.");
+
         Ok(0)
     } else {
         println!("Showing help for command \"{}\"...", args[0]);
-        Ok(0)
+        let command = String::from(args[0]).to_uppercase();
+        let mut result: Result<u32, LainErr> = Ok(0);
+        println!("command: {}", command);
+        match command.as_ref() {
+            "HELP" => {
+                println!("()         -> Shows a general help prompt.");
+                println!("(command)  -> Shows help prompt for command.");
+            },
+            "QUIT" => println!("()         -> Exits MyLain-rs."),
+            "EXIT" => println!("()         -> Exits MyLain-rs."),
+            _ => {
+                println!("Cannot find said command.");
+                result = Err(LainErr::BADCOMMAND);
+            }
+        };
+        result
     }
 }
 
