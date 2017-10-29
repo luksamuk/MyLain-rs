@@ -16,6 +16,9 @@
 use std::io;
 use std::io::Write;
 
+const MYLAIN_VERSION: &'static str = env!("CARGO_PKG_VERSION");
+
+
 #[derive(Debug)]
 enum LainErr {
     QUIT,
@@ -79,7 +82,7 @@ fn lain_dispose() {
 }
 
 fn main() {
-    println!("MyLain-rs v0.0.0");
+    println!("MyLain-rs v{}", MYLAIN_VERSION);
     println!("Hello, user!");
     lain_init();
     lain_repl();
