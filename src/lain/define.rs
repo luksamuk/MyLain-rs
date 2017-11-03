@@ -13,13 +13,11 @@
  *  <http://www.gnu.org/licenses/>.                               *
  ******************************************************************/
 
-pub mod lain;
+pub const MYLAIN_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
-
-fn main() {
-    println!("MyLain-rs v{}", lain::define::MYLAIN_VERSION);
-    println!("Hello, user!");
-    lain::init();
-    lain::repl();
-    lain::dispose();
+#[derive(Debug)]
+pub enum LainErr {
+    QUIT,
+    TESTERR,
+    BADCOMMAND,
 }

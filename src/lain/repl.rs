@@ -13,13 +13,29 @@
  *  <http://www.gnu.org/licenses/>.                               *
  ******************************************************************/
 
-pub mod lain;
 
+use lain::define::LainErr;
+use lain::help;
 
-fn main() {
-    println!("MyLain-rs v{}", lain::define::MYLAIN_VERSION);
-    println!("Hello, user!");
-    lain::init();
-    lain::repl();
-    lain::dispose();
+pub fn eval(input: &Vec<&str>) -> Result<u32, LainErr> {
+    if input.len() < 1 {
+        Ok(0)
+    } else {
+        let command = String::from(input[0]).to_uppercase();
+
+        // Debug atoms
+        print!("({} '(", command);
+        for i in 1..input.len() {
+            print!("{} ", input[i]);
+        }
+        println!("))");
+        
+        match command.as_ref() {
+            "EXIT"     => Err(LainErr::QUIT),
+            "QUIT"     => Err(LainErr::QUIT),
+            "THROWERR" => Err(LainErr::TESTERR),
+            "HELP"     => help::lain_help(&input[1..]),
+            _          => Ok(0),
+        }
+    }
 }

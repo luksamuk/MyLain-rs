@@ -6,7 +6,7 @@ The very useful, distributed personal assistant for smart homes
 Exists MyLain-rs.
 ** DONE exit
 Exits MyLain-rs.
-** TODO help
+** DONE help
 - ()        => Shows help prompt.
 - (command) => Also shows help for single commands.
 ** TODO connect

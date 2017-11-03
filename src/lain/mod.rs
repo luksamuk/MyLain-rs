@@ -13,13 +13,47 @@
  *  <http://www.gnu.org/licenses/>.                               *
  ******************************************************************/
 
-pub mod lain;
+pub mod define;
+pub mod repl;
+pub mod help;
+
+use std::io;
+use std::io::Write;
+use lain::define::LainErr;
 
 
-fn main() {
-    println!("MyLain-rs v{}", lain::define::MYLAIN_VERSION);
-    println!("Hello, user!");
-    lain::init();
-    lain::repl();
-    lain::dispose();
+pub fn init() {
+    println!("Initializing core modules...");
+    println!("Close this world. Open the next.");
+}
+
+
+
+pub fn dispose() {
+    println!("Disposing core modules...");
+    //
+    println!("MyLain-rs client halted. Downgrading to reality.");
+}
+
+pub fn repl() {
+    loop {
+        print!("lain > ");
+        io::stdout().flush()
+            .expect("Cannot print REPL prompt.");
+
+        let mut input = String::new();
+        io::stdin().read_line(&mut input)
+            .expect("Cannot read REPL command.");
+
+        let input = String::from(input.trim());
+        let atoms = input.split_whitespace()
+            .collect::<Vec<&str>>();
+
+        let result = repl::eval(&atoms);
+
+        match result {
+            Err(LainErr::QUIT) => break,
+            _                  => println!("{:?}", result),
+        };
+    }
 }
