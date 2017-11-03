@@ -23,6 +23,8 @@ use lain::define::LainErr;
 
 
 pub fn init() {
+    println!("MyLain-rs v{}", define::MYLAIN_VERSION);
+    println!("Hello, user!");
     println!("Initializing core modules...");
     println!("Close this world. Open the next.");
 }

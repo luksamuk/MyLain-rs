@@ -17,8 +17,6 @@ pub mod lain;
 
 
 fn main() {
-    println!("MyLain-rs v{}", lain::define::MYLAIN_VERSION);
-    println!("Hello, user!");
     lain::init();
     lain::repl();
     lain::dispose();
