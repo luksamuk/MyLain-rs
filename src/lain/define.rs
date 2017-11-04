@@ -19,5 +19,7 @@ pub const MYLAIN_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 pub enum LainErr {
     QUIT,
     TESTERR,
+    NOTIMPL,
     BADCOMMAND,
+    BADCONFIG,
 }

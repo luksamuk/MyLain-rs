@@ -1,4 +1,23 @@
-[root]
+[[package]]
+name = "log"
+version = "0.3.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
 name = "mylain-rs"
 version = "0.1.0"
+dependencies = [
+ "rust-ini 0.9.12 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
+[[package]]
+name = "rust-ini"
+version = "0.9.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "log 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[metadata]
+"checksum log 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)" = "880f77541efa6e5cc74e76910c9884d9859683118839d6a1dc3b11e63512565b"
+"checksum rust-ini 0.9.12 (registry+https://github.com/rust-lang/crates.io-index)" = "7c6975d9bfcab77cffaf22c9f7fe08baa55a075e4ec1f8197d1f4be93c4a8658"

@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Lucas Vieira <lucasvieira@protonmail.com>"]
 
 [dependencies]
+rust-ini = "0.9"

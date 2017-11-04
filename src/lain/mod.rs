@@ -16,16 +16,37 @@
 pub mod define;
 pub mod repl;
 pub mod help;
+pub mod config;
 
 use std::io;
 use std::io::Write;
 use lain::define::LainErr;
 
+static mut GLOBALCONF: Option<config::LainConfig> = None;
 
 pub fn init() {
     println!("MyLain-rs v{}", define::MYLAIN_VERSION);
     println!("Hello, user!");
     println!("Initializing core modules...");
+    match config::load() {
+        Err(LainErr::BADCONFIG) => {
+            print!("Creating config for first time... ");
+            io::stdout().flush().ok();
+            config::init();
+            println!("Done.");
+        },
+        Err(_) => panic!("Unknown file loading error"),
+        Ok(config) => {
+            println!("MyLain config file loaded");
+            println!("Motto: {}", config.motto);
+            println!("Interface: {}", config.interface);
+            println!("Port: {}", config.port);
+
+            unsafe {
+                GLOBALCONF = Some(config);
+            }
+        }
+    };
     println!("Close this world. Open the next.");
 }
 
