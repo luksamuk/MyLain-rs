@@ -37,14 +37,10 @@ pub fn init() {
         },
         Err(_) => panic!("Unknown file loading error"),
         Ok(config) => {
-            println!("MyLain config file loaded");
-            println!("Motto: {}", config.motto);
-            println!("Interface: {}", config.interface);
-            println!("Port: {}", config.port);
-
             unsafe {
                 GLOBALCONF = Some(config);
             }
+            println!("MyLain config file loaded.");
         }
     };
     println!("Close this world. Open the next.");
