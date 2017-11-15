@@ -15,25 +15,9 @@
 
 extern crate ini;
 use lain::define::LainErr;
-use lain::GLOBALCONF;
+use lain::define::LainConfig;
 
-pub struct LainConfig {
-    pub motto: String,
-    pub port: u32,
-    pub interface: String,
-}
-
-impl LainConfig {
-    pub fn new() -> LainConfig {
-        LainConfig {
-            motto: String::from(""),
-            interface: String::from(""),
-            port: 0,
-        }
-    }
-}
-
-pub fn init() {
+pub fn init() -> LainConfig {
     let mut conf = ini::Ini::new();
 
     // General config
@@ -45,6 +29,12 @@ pub fn init() {
     // Write
     conf.write_to_file("lain.ini")
         .unwrap();
+
+    LainConfig {
+        motto: String::from("Close this world. Open the next."),
+        interface: String::from("wlp3s0"),
+        port: 6714,
+    }
 }
 
 pub fn load() -> Result<LainConfig, LainErr> {
@@ -66,16 +56,14 @@ pub fn load() -> Result<LainConfig, LainErr> {
     }
 }
 
-pub fn print() {
+pub fn print(config: Option<LainConfig>) {
     println!("GENERAL CONFIGURATION");
-    unsafe {
-        match GLOBALCONF {
-            None => println!("No configuration loaded."),
-            Some(ref conf) => {
-                println!("((:motto {})", conf.motto);
-                println!(" (:interface {})", conf.interface);
-                println!(" (:port {}))", conf.port);
-            }
-        };
-    }
+    match config {
+        None => println!("No configuration loaded."),
+        Some(ref conf) => {
+            println!("((:motto {})", conf.motto);
+            println!(" (:interface {})", conf.interface);
+            println!(" (:port {}))", conf.port);
+        }
+    };
 }

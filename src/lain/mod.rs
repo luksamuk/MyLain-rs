@@ -21,29 +21,28 @@ pub mod config;
 use std::io;
 use std::io::Write;
 use lain::define::LainErr;
+use lain::define::LainConfig;
 
-static mut GLOBALCONF: Option<config::LainConfig> = None;
-
-pub fn init() {
+pub fn init() -> Option<LainConfig> {
     println!("MyLain-rs v{}", define::MYLAIN_VERSION);
     println!("Hello, user!");
     println!("Initializing core modules...");
+    let mut conf: Option<LainConfig> = None;
     match config::load() {
         Err(LainErr::BADCONFIG) => {
             print!("Creating config for first time... ");
             io::stdout().flush().ok();
-            config::init();
+            conf = Some(config::init());
             println!("Done.");
         },
         Err(_) => panic!("Unknown file loading error"),
         Ok(config) => {
-            unsafe {
-                GLOBALCONF = Some(config);
-            }
+            conf = Some(config);
             println!("MyLain config file loaded.");
         }
     };
     println!("Close this world. Open the next.");
+    conf
 }
 
 
@@ -54,7 +53,7 @@ pub fn dispose() {
     println!("MyLain-rs client halted. Downgrading to reality.");
 }
 
-pub fn repl() {
+pub fn repl(config: &mut Option<LainConfig>) {
     loop {
         print!("lain > ");
         io::stdout().flush()
@@ -68,7 +67,7 @@ pub fn repl() {
         let atoms = input.split_whitespace()
             .collect::<Vec<&str>>();
 
-        let result = repl::eval(&atoms);
+        let result = repl::eval(&atoms, config);
 
         match result {
             Err(LainErr::QUIT) => break,

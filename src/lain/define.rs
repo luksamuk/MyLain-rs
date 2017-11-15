@@ -23,3 +23,20 @@ pub enum LainErr {
     BADCOMMAND,
     BADCONFIG,
 }
+
+#[derive(Clone)]
+pub struct LainConfig {
+    pub motto: String,
+    pub interface: String,
+    pub port: u32,
+}
+
+impl LainConfig {
+    pub fn new() -> LainConfig {
+        LainConfig {
+            motto: String::from(""),
+            interface: String::from(""),
+            port: 0,
+        }
+    }
+}

@@ -17,8 +17,9 @@
 use lain::define::LainErr;
 use lain::help;
 use lain::config;
+use lain::define::LainConfig;
 
-pub fn eval(input: &Vec<&str>) -> Result<u32, LainErr> {
+pub fn eval(input: &Vec<&str>, config: &mut Option<LainConfig>) -> Result<u32, LainErr> {
     if input.len() < 1 {
         Ok(0)
     } else {
@@ -39,7 +40,7 @@ pub fn eval(input: &Vec<&str>) -> Result<u32, LainErr> {
             "CONFIG"   => {
                 let args = &input[1..];
                 if args.len() == 0 {
-                    config::print();
+                    config::print(config.take());
                     Ok(0)
                 } else {
                     println!("Can't handle changing or viewing specific config for now, sorry.");
