@@ -13,8 +13,8 @@ Exits MyLain-rs.
 - ()            => Connects to local dummy IP address and port.
 - (ipaddr port) => Connects to server running at the specified IP address and port.
 ** TODO config
-- ()            => Shows all config fields.
-- (:get field)  => Prints the current configuration for a field.
+- ()            => Shows all config fields. (DONE)
+- (:get field)  => Prints the current configuration for a field. (DONE)
 - (:set field)  => Redefines the current configuration for a field.
 ** TODO status
 Shows general client status. If client is connected to server, server status is fetched as well.

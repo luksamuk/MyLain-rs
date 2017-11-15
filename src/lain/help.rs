@@ -25,6 +25,7 @@ pub fn lain_help(args: &[&str]) -> Result<u32, LainErr> {
         println!("GENERAL COMMANDS");
         println!("help      -- () Shows this prompt.");
         println!("             (command) Shows help for said command.");
+        println!("config    -- () Shows all config fields.");
         println!("quit      -- () Exits MyLain.");
         println!("exit      -- () Exits MyLain.");
         println!("throwerr  -- () Throws a test error.");
@@ -42,6 +43,9 @@ pub fn lain_help(args: &[&str]) -> Result<u32, LainErr> {
             },
             "QUIT"     => println!("()         -> Exits MyLain-rs."),
             "EXIT"     => println!("()         -> Exits MyLain-rs."),
+            "CONFIG"   => {
+                println!("()         -> Shows all configuration fields.");
+            },
             "THROWERR" => println!("()         -> Throws a test error, cathegorized under the flag TESTERR."),
             _ => {
                 println!("Cannot find said command.");

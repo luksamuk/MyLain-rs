@@ -18,9 +18,9 @@ pub mod lain;
 use lain::define::LainConfig;
 
 fn main() {
-    let mut GLOBALCONF: Option<LainConfig> = None;
+    let mut configuration: Option<LainConfig> = None;
     
-    GLOBALCONF = lain::init();
-    lain::repl(&mut GLOBALCONF);
+    configuration = lain::init();
+    lain::repl(&mut configuration);
     lain::dispose();
 }

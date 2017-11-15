@@ -15,6 +15,7 @@
 
 pub const MYLAIN_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
+// Error enumerations
 #[derive(Debug)]
 pub enum LainErr {
     QUIT,
@@ -24,6 +25,7 @@ pub enum LainErr {
     BADCONFIG,
 }
 
+// Configuration file related
 #[derive(Clone)]
 pub struct LainConfig {
     pub motto: String,
@@ -39,4 +41,27 @@ impl LainConfig {
             port: 0,
         }
     }
+
+    pub fn get(self, which: &str) {
+        let field = String::from(which).to_uppercase();
+        match field.as_ref() {
+            "MOTTO"     => println!("\"{}\"", self.motto),
+            "INTERFACE" => println!("{}", self.interface),
+            "PORT"      => println!("{}", self.port),
+            _           => println!("Unknown configuration field \"{}\"", field),
+        };
+    }
+}
+
+// Runtime status related
+#[derive(Clone)]
+pub struct LainStatus {
+    
+}
+
+// Global state related
+#[derive(Clone)]
+pub struct LainState {
+    pub config: Option<LainConfig>,
+    pub status: LainStatus,
 }
