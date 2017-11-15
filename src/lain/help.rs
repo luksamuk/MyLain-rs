@@ -26,6 +26,7 @@ pub fn lain_help(args: &[&str]) -> Result<u32, LainErr> {
         println!("help      -- () Shows this prompt.");
         println!("             (command) Shows help for said command.");
         println!("config    -- () Shows all config fields.");
+        println!("             (:get field) Shows config field.");
         println!("quit      -- () Exits MyLain.");
         println!("exit      -- () Exits MyLain.");
         println!("throwerr  -- () Throws a test error.");
@@ -38,13 +39,16 @@ pub fn lain_help(args: &[&str]) -> Result<u32, LainErr> {
         println!("command: {}", command);
         match command.as_ref() {
             "HELP" => {
-                println!("()         -> Shows a general help prompt.");
-                println!("(command)  -> Shows help prompt for command.");
+                println!("()           -> Shows a general help prompt.");
+                println!("(command)    -> Shows help prompt for command.");
             },
-            "QUIT"     => println!("()         -> Exits MyLain-rs."),
-            "EXIT"     => println!("()         -> Exits MyLain-rs."),
+            "QUIT"     =>
+                println!("()           -> Exits MyLain-rs."),
+            "EXIT"     =>
+                println!("()           -> Exits MyLain-rs."),
             "CONFIG"   => {
-                println!("()         -> Shows all configuration fields.");
+                println!("()           -> Shows all configuration fields.");
+                println!("(:get field) -> Shows the value of a specific configuration field.");
             },
             "THROWERR" => println!("()         -> Throws a test error, cathegorized under the flag TESTERR."),
             _ => {

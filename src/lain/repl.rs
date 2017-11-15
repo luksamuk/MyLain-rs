@@ -46,7 +46,7 @@ pub fn eval(input: &Vec<&str>, config: &mut Option<LainConfig>) -> Result<u32, L
                     match String::from(args[0]).to_uppercase().as_ref() {
                         ":GET" => {
                             config.clone()
-                                .expect("Cannot use an invalid configuration")
+                                .expect("Loaded configuration is invalid")
                                 .get(args[1]);
                             Ok(0)
                         },
