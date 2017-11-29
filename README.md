@@ -17,7 +17,33 @@ MyLain is actually a small REPL, which is supposed to be extended by configuring
 The actual REPL is comprised of so little things right now, so soon you'll be able to type `help` after starting it to see the quick cheatsheet. `help [command]` will also give you more information on said command.
 
 ## Building
+### Building natively
 This project uses Cargo as project manager, so you can just build everything by typing `cargo build`, or run it by typing `cargo run`.
+
+### Cross-compiling for Raspberry Pi
+It is possible to build this project for an ARMv7 target -- specifically, for the Raspberry Pi 3 Model B, which was used for this test.
+
+#### Installing GCC ARM Toolchain
+First, you'll need to install the ARM toolchain for your distro. This will depend on which distro you're on; on Void Linux, you'll install the packages `cross-arm-linux-gnueabihf` and `cross-arm-linux-gnueabihf` (Also, you may need to create a symlink to folder `/usr/arm-linux-gnueabihf/usr/lib` on folder `/usr/arm-linux-gnueabihf` so the proper libraries are found.
+
+#### Installing Cargo's ARM target
+Now, you'll need to install Cargo's ARM target. You can do that by using `rustup`.
+
+`$ rustup target add armv7-unknown-linux-gnueabihf`
+
+Then, after installed, edit the file `~/.cargo/config` and put the following in it:
+
+```conf
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"
+```
+
+#### Building the project
+All that's left to do is to actually build the project. `cd` to the project folder and run the following command to cross-compile the project:
+
+`$ cargo build --target=armv7-unknown-linux-gnueabihf`
+
+After compilation, you should then be able to find the ARM binary on path `target/armv7-unknown-linux-gnueabihf/debug`. Just copy it to your Raspberry Pi and you're all set.
 
 ## License
 This project is distributed under the GNU LGPLv3 license. See `LICENSE` or the header of source files for details.
